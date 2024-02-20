@@ -1,13 +1,17 @@
 import React from 'react';
 import { View, StyleSheet, Text, FlatList, TouchableOpacity, TextInput } from 'react-native';
 
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, AntDesign } from '@expo/vector-icons';
+
 
 
 const Tarefas = ({ item }) => {
   return (
-    <View style={{ marginBottom: 10, backgroundColor: 'white', padding: 10, borderRadius: 10 }}>
+    <View style={{ marginBottom: 10, backgroundColor: 'white', padding: 10, borderRadius: 10, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
       <Text>{item}</Text>
+      <TouchableOpacity onPress={() => excluirTarefa()}>
+        <AntDesign name="delete" size={30} color="black" />
+      </TouchableOpacity>
     </View>
   );
 }
@@ -28,6 +32,11 @@ const App = () => {
     setTarefa('');
   }
 
+  function excluirTarefa(index) {
+    //Criar um array de tarefas e utilizar filter para lógica de exclusão
+  }
+
+
 
   return (
     <View style={styles.container}>
@@ -41,15 +50,16 @@ const App = () => {
         keyExtractor={(item, index) => index.toString()}
       />
 
-      <View style={styles.inputContainer}>
+      <View style={styles.inputContainer}>  
         <TextInput
           style={styles.input}
           placeholder="Digite uma tarefa"
           value={tarefa}
           onChangeText={(texto) => setTarefa(texto)}
         />
+
         <TouchableOpacity onPress={() => adicionarTarefa()} style={styles.addBtn}>
-          <Ionicons name="add" size={30} color="#C0C0C0" />
+          <Ionicons name="add" size={30} color="black" />
         </TouchableOpacity>
       </View>
     </View>
@@ -78,7 +88,7 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 40,
-    borderRadius: 15,
+    borderRadius: 10,
     borderColor: 'gray',
     paddingHorizontal: 10,
     backgroundColor: 'white',
@@ -87,7 +97,7 @@ const styles = StyleSheet.create({
   addBtn: {
     marginLeft: 10,
     marginTop: 4,
-    borderRadius: 50,
+    borderRadius: 10,
     padding: 5,
     backgroundColor: 'white',
   }
