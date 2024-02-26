@@ -11,6 +11,7 @@ const App = () => {
   const [tarefa, setTarefa] = React.useState(null);
   const [isEditar, setIsEditar] = React.useState(false);
   const [visible, setVisible] = React.useState(false);
+  const [indiceAtual, setIndiceAtual] = React.useState(null);
 
   const showModal = () => setVisible(true);
   const hideModal = () => setVisible(false);
@@ -56,12 +57,37 @@ const App = () => {
   }
 
   function editarTarefa(indice) {
-
+    // abrir modal
     showModal();
 
-    console.log('indice: ', indice)
+    // setar indice
+    setIndiceAtual(indice);
 
+    // setar tarefa
+    setTarefa(tarefas[indice]);
   }
+
+  function salvarTarefa() {
+    // copia do array
+    const copiaTarefas = [...tarefas];
+
+
+
+    // atualizar item
+    copiaTarefas[indiceAtual] = {
+      tarefa: tarefa,
+      isConcluido: false
+    }
+
+    // atualizar estado
+    setTarefas(copiaTarefas);
+
+    //fechar modal
+    hideModal();
+  }
+
+
+
 
   return (
     <PaperProvider>
@@ -98,11 +124,11 @@ const App = () => {
           <Modal visible={visible} onDismiss={hideModal} contentContainerStyle={containerStyle}>
             <TextInput
               label="Tarefa"
-              value={tarefa}
+              value={tarefa.tarefa} // {tarefa: 'varrer chao123, isConcluido: false}
               onChangeText={text => setTarefa(text)}
               style={{ marginBottom: 20 }}
             />
-            <Button mode="contained" onPress={() => console.log('Pressed')}>
+            <Button mode="contained" onPress={() => salvarTarefa()}>
               OK
             </Button>
           </Modal>
