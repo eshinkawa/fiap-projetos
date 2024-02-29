@@ -1,8 +1,11 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import { PaperProvider } from 'react-native-paper';
-import Tarefas from './app/screens/Tarefas';
 import { NavigationContainer } from "@react-navigation/native";
+
+import EditarTarefa from './app/screens/Editar';
+import Tarefas from './app/screens/Tarefas';
+
 import { createStackNavigator } from "@react-navigation/stack";
 
 const Stack = createStackNavigator();
@@ -16,6 +19,11 @@ const App = () => {
             name="Tarefas"
             component={Tarefas}
             options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="EditarTarefa"
+            component={EditarTarefa}
+            options={{ headerShown: true }}
           />
         </Stack.Navigator>
       </NavigationContainer>

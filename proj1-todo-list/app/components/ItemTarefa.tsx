@@ -1,8 +1,12 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
 export const ItemTarefa = ({ item, indice, delTarefa, marcarTarefa, editarTarefa }) => {
+
+  const navigation = useNavigation();
+
   return (
     <TouchableOpacity onPress={() => marcarTarefa(indice)}>
       <View style={styles.container}>
@@ -12,7 +16,7 @@ export const ItemTarefa = ({ item, indice, delTarefa, marcarTarefa, editarTarefa
             <Ionicons name="trash" size={24} color="red" />
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => editarTarefa(indice)}>
+          <TouchableOpacity onPress={() => navigation.navigate('EditarTarefa')}>
             <Ionicons name="create" size={24} color="lightgray" />
           </TouchableOpacity>
 
