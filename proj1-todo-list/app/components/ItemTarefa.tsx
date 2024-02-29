@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
-export const Tarefas = ({ item, indice, delTarefa, marcarTarefa, editarTarefa }) => {
+export const ItemTarefa = ({ item, indice, delTarefa, marcarTarefa, editarTarefa }) => {
   return (
     <TouchableOpacity onPress={() => marcarTarefa(indice)}>
       <View style={styles.container}>
