@@ -16,8 +16,8 @@ export const ItemTarefa = ({ item, indice, delTarefa, marcarTarefa, editarTarefa
             <Ionicons name="trash" size={24} color="red" />
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => navigation.navigate('EditarTarefa')}>
-            <Ionicons name="create" size={24} color="lightgray" />
+          <TouchableOpacity onPress={() => navigation.navigate('EditarTarefa', { tarefa: item, indice })}>
+            <Ionicons name="create" size={24} color="blue" />
           </TouchableOpacity>
 
           {item.isConcluido && (
@@ -25,7 +25,7 @@ export const ItemTarefa = ({ item, indice, delTarefa, marcarTarefa, editarTarefa
           )}
         </View>
       </View>
-    </TouchableOpacity>
+    </TouchableOpacity >
   );
 }
 

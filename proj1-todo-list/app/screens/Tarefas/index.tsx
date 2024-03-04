@@ -4,6 +4,7 @@ import { PaperProvider, Modal, Portal, Text, Button, TextInput } from 'react-nat
 import { Ionicons } from '@expo/vector-icons';
 import { ItemTarefa } from '../../components/ItemTarefa';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
 
 const Tarefas = () => {
   const [tarefas, setTarefas] = React.useState([]);
@@ -11,23 +12,29 @@ const Tarefas = () => {
   const [visible, setVisible] = React.useState(false);
   const [indiceAtual, setIndiceAtual] = React.useState(null);
 
+  const navigation = useNavigation();
 
   useEffect(() => {
-    const getTarefas = async () => {
-      try {
-        const tarefas = await AsyncStorage.getItem('tarefas');
-        if (tarefas !== null) {
-          const tarefasConvertidas = JSON.parse(tarefas);
-          setTarefas(tarefasConvertidas);
-        }
-      } catch (error) {
-        console.log('Erro ao recuperar as tarefas');
-      }
-    }
-
+    console.log('useEffect rodando')
     getTarefas();
-
   }, []);
+
+  useFocusEffect(() => {
+    getTarefas();
+  })
+
+
+  const getTarefas = async () => {
+    try {
+      const tarefas = await AsyncStorage.getItem('tarefas');
+      if (tarefas !== null) {
+        const tarefasConvertidas = JSON.parse(tarefas);
+        setTarefas(tarefasConvertidas);
+      }
+    } catch (error) {
+      console.log('Erro ao recuperar as tarefas');
+    }
+  }
 
   useEffect(() => {
     const getTarefa = async () => {
@@ -94,7 +101,6 @@ const Tarefas = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Tarefas do dia</Text>
       <FlatList
         data={tarefas}
         renderItem={({ item, index }) => (
@@ -128,7 +134,7 @@ const Tarefas = () => {
             label="Tarefa"
             value={tarefa.tarefa}
             onChangeText={(text) => setTarefa({ ...tarefa, tarefa: text })}
-            style={{ marginBottom: 20 }}
+            style={{ marginBottom: 20, color: 'black' }}
           />
           <Button mode="contained" onPress={adicionarOuEditarTarefa}>
             OK
@@ -144,12 +150,12 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#f0f0f0',
     padding: 20,
-    paddingTop: 90,
   },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 20,
+    color: 'black',
   },
   inputContainer: {
     marginBottom: 20,
@@ -164,7 +170,8 @@ const styles = StyleSheet.create({
     borderColor: 'gray',
     paddingHorizontal: 10,
     backgroundColor: 'white',
-    flex: 1, // Adicionado para ocupar o espaço disponível
+    flex: 1,
+    color: 'black',
   },
   addBtn: {
     marginLeft: 10,

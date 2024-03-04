@@ -18,12 +18,12 @@ const App = () => {
           <Stack.Screen
             name="Tarefas"
             component={Tarefas}
-            options={{ headerShown: false }}
+            options={{ headerShown: true, title: 'Tarefas do dia' }}
           />
           <Stack.Screen
             name="EditarTarefa"
             component={EditarTarefa}
-            options={{ headerShown: true }}
+            options={{ headerShown: true, title: 'Editar Tarefa' }}
           />
         </Stack.Navigator>
       </NavigationContainer>
